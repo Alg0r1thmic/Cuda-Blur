@@ -8,5 +8,5 @@ Proyecto Para Sistemas operativos laboratorio
 ## ejecute el script
 
 ```shell
-  ./compilar_ejecutar.shh
+  ./compilar_ejecutar.sh
 ```
