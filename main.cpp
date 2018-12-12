@@ -66,11 +66,11 @@ int main() {
 
 	CImg<unsigned char> salida(arch_salida);
 	salida.resize(600,800);
-	CImgDisplay disp1(salida, arch_salida);
+	CImgDisplay disp1(salida, "imagen procesada");
 	//disp1.resize(salida,1);
 	CImg<unsigned char> entrada(arch_entrada);
 	entrada.resize(600,800);
-	CImgDisplay disp2(entrada, arch_entrada);
+	CImgDisplay disp2(entrada, "imagen entrada");
 	//disp2.resize(entrada,1);
 
 
