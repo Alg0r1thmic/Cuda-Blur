@@ -51,10 +51,22 @@ void blurr (unsigned char* imagen_ini, unsigned char* imagen_fin, int width, int
     dim3 dim_bloque(512,1,1);
     dim3 dim_grid((unsigned int) ceil((double)(width*height*3/dim_bloque.x)), 1, 1 );
 
+    cudaEvent_t start, stop;
+    cudaEventCreate(&start);
+    cudaEventCreate(&stop);
+	
+    cudaEventRecord(start);
     blur<<<dim_grid, dim_bloque>>>(cuda_input, cuda_output, width, height); 
+    cudaEventRecord(stop);
+
     getError(cudaMemcpy(imagen_fin, cuda_output, width*height*3*sizeof(unsigned char), cudaMemcpyDeviceToHost ));
+    cudaEventSynchronize(stop);
+	
+    float ms = 0;
+    std::cout << "--------------\nTiempo de proceso: ";
+    cudaEventElapsedTime(&ms, start, stop);
+    std::cout << ms/1000 <<" s\n--------------\n";
 
     getError(cudaFree(cuda_input));
     getError(cudaFree(cuda_output));
 }
-
