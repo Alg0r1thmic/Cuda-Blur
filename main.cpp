@@ -8,6 +8,7 @@
 #include <cuda.h>
 #include <cuda_runtime.h>
 #include <cmath>
+#include <time.h>
 using namespace std;
 //funciones  auxiliares
 float* gaussianDistance(float sigma, const int fsize); 
@@ -19,6 +20,10 @@ using namespace cimg_library;
 
 int main() {
    
+    clock_t total;
+    clock_t t;
+    t = clock();
+
     //Archivos, de entrada
     const char *arch_entrada = "bird.png";
     const char *arch_salida = "bird_blur.png";
@@ -63,14 +68,17 @@ int main() {
       cout << "Error de encoder" << error << ": "<< lodepng_error_text(error) << "\n";
 
 
+    t = clock() - t;
+    cout <<"Tiempo total: "<< ((float)t)/CLOCKS_PER_SEC << " s\n";
+
 
 	CImg<unsigned char> salida(arch_salida);
 	salida.resize(600,800);
-	CImgDisplay disp1(salida, "imagen procesada");
+	CImgDisplay disp1(salida, arch_salida);
 	//disp1.resize(salida,1);
 	CImg<unsigned char> entrada(arch_entrada);
 	entrada.resize(600,800);
-	CImgDisplay disp2(entrada, "imagen entrada");
+	CImgDisplay disp2(entrada, arch_entrada);
 	//disp2.resize(entrada,1);
 
 
@@ -82,6 +90,7 @@ int main() {
 
     delete[] imagen_ini;
     delete[] imagen_fin;
+
     return 0;
 
 }
