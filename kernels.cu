@@ -43,12 +43,14 @@ void blur(unsigned char* imagen_ini, unsigned char* imagen_fin, int width, int h
 void blurr (unsigned char* imagen_ini, unsigned char* imagen_fin, int width, int height) {
     unsigned char* cuda_input;
     unsigned char* cuda_output;
+    //Guarda memoria en el  device 
     getError(cudaMalloc( (void**) &cuda_input, width*height*3*sizeof(unsigned char)));
     getError(cudaMemcpy( cuda_input, imagen_ini, width*height*3*sizeof(unsigned char), cudaMemcpyHostToDevice ));
  
     getError(cudaMalloc( (void**) &cuda_output, width*height*3*sizeof(unsigned char)));
-
+    //declara que el tamaño del bloque tendra 512*1 hilos, se almacenara en una lista
     dim3 dim_bloque(512,1,1);
+    //declara que en un grid o malla tendra el tamaño ceil((double)(width*height*3/dim_bloque.x)) de bloques X 1, se almacena en un array
     dim3 dim_grid((unsigned int) ceil((double)(width*height*3/dim_bloque.x)), 1, 1 );
 
     cudaEvent_t start, stop;
