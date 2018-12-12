@@ -65,17 +65,19 @@ int main() {
 
 
 	CImg<unsigned char> salida(arch_salida);
+	salida.resize(600,800);
 	CImgDisplay disp1(salida, arch_salida);
-	disp1.assign(200,200);
-	//disp1.resize(disp1,1);
+	//disp1.resize(salida,1);
 	CImg<unsigned char> entrada(arch_entrada);
+	entrada.resize(600,800);
 	CImgDisplay disp2(entrada, arch_entrada);
-	disp2.assign(200,200);
+	//disp2.resize(entrada,1);
+
 
 	//start event loop
 	while(true) {
 	     //All the interactive code is inside the event loop
-	     cimg_library::CImgDisplay::wait(disp1, disp2);
+	     cimg_library::CImgDisplay::wait(disp2,disp1);
 	}
 
     delete[] imagen_ini;
