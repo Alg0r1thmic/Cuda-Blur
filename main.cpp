@@ -20,8 +20,8 @@ using namespace cimg_library;
 int main() {
    
     //Archivos, de entrada
-    const char *arch_entrada = "musica.png";
-    const char *arch_salida = "musica_blur.png";
+    const char *arch_entrada = "bird.png";
+    const char *arch_salida = "bird_blur.png";
 
     vector<unsigned char> imagen_vector;
     unsigned int width, height;
