@@ -65,7 +65,7 @@ void blurr (unsigned char* imagen_ini, unsigned char* imagen_fin, int width, int
     float ms = 0;
     std::cout << "--------------\nTiempo de proceso: ";
     cudaEventElapsedTime(&ms, start, stop);
-    std::cout << ms/1000 <<" s\n--------------\n";
+    std::cout << ms/1000 <<" s\n--------------\n ";
 
     getError(cudaFree(cuda_input));
     getError(cudaFree(cuda_output));
